@@ -3,15 +3,18 @@ set -eu
 
 backing_device=$(findmnt -vno SOURCE /sysroot)
 echo "Backing device: ${backing_device}"
+
+# Handling devicemapper targets is a whole other thing
+case $backing_device in
+    /dev/mapper/*) echo "Not growing $backing_device"; exit 0 ;;
+esac
+
 syspath=/sys/class/block/$(basename "${backing_device}")
 if ! test -d "${syspath}"; then
     echo "failed to find backing device ${syspath}"; exit 1
 fi
 
-# Handling devicemapper targets is a whole other thing
-case $backing_device in
-    /dev/mapper/*) "Not growing $backing_device"; exit 0 ;;
-esac
+
 
 # Note that we expect that the rootfs is on a partition
 partition=$(cat "${syspath}"/partition)
