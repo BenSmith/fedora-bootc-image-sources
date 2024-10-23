@@ -39,6 +39,12 @@ COPY . /src
 WORKDIR /src
 RUN rm -vf /src/*.repo
 COPY --from=repos /etc/yum.repos.d/*.repo /src
+# Brutally inject releasever and repos into manifest file. This is a major hack
+# until rpm-ostree does this on its own: https://github.com/coreos/rpm-ostree/pull/5136
+RUN --mount=type=bind,from=repos,src=/,dst=/repos source /repos/etc/os-release && \
+ echo -e "\nreleasever: $VERSION_ID" >> ${MANIFEST} && \
+ echo -e "\nrepos:\n" >> ${MANIFEST} && \
+ dnf repolist --setopt=reposdir=. | tail -n +2 | cut -f1 -d' ' | sed 's/^/- /' >> ${MANIFEST}
 RUN --mount=type=cache,target=/workdir \
     --mount=type=bind,rw=true,src=.,dst=/buildcontext,bind-propagation=shared \
       rpm-ostree compose image --image-config fedora-bootc-config.json \

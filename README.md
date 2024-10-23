@@ -42,8 +42,6 @@ Fedora repos and dnf variables. E.g.:
 podman build --from quay.io/fedora/fedora:41 ...
 ```
 
-WIP: THIS DOESN'T WORK YET.
-
 ### Deriving
 
 You are of course also free to fork, customize, and build base images yourself.
