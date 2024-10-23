@@ -39,10 +39,15 @@ COPY . /src
 WORKDIR /src
 RUN rm -vf /src/*.repo
 COPY --from=repos /etc/yum.repos.d/*.repo /src
-RUN --mount=type=cache,target=/workdir --mount=type=bind,rw=true,src=.,dst=/buildcontext,bind-propagation=shared rpm-ostree compose image \
- --image-config fedora-bootc-config.json --cachedir=/workdir --format=ociarchive --initialize ${MANIFEST} /buildcontext/out.ociarchive
+RUN --mount=type=cache,target=/workdir \
+    --mount=type=bind,rw=true,src=.,dst=/buildcontext,bind-propagation=shared \
+      rpm-ostree compose image --image-config fedora-bootc-config.json \
+        --cachedir=/workdir --format=ociarchive --initialize ${MANIFEST} \
+        /buildcontext/out.ociarchive
 
 FROM oci-archive:./out.ociarchive
 # Need to reference builder here to force ordering. But since we have to run
 # something anyway, we might as well cleanup after ourselves.
-RUN --mount=type=bind,from=builder,src=.,target=/var/tmp --mount=type=bind,rw=true,src=.,dst=/buildcontext,bind-propagation=shared rm /buildcontext/out.ociarchive
+RUN --mount=type=bind,from=builder,src=.,target=/var/tmp \
+    --mount=type=bind,rw=true,src=.,dst=/buildcontext,bind-propagation=shared \
+      rm /buildcontext/out.ociarchive
