@@ -32,6 +32,16 @@ podman build --security-opt=label=disable --cap-add=all \
 
 See the `Containerfile` for more details. This builds the default `tier-1` image.
 
+## Fedora versions
+
+By default, the base images are built for Fedora rawhide. To build against a
+different Fedora version, you can override the `FROM` image used to obtain the
+Fedora repos and dnf variables. E.g.:
+
+```
+podman build --from quay.io/fedora/fedora:41 ...
+```
+
 ### Deriving
 
 You are of course also free to fork, customize, and build base images yourself.

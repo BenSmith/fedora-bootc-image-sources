@@ -1,7 +1,3 @@
-releasever: rawhide
-repos:
-  - rawhide
-
 metadata:
   name: fedora-boot-tier1
   summary: Fedora Bootable Tier 1
