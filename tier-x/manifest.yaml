@@ -10,12 +10,12 @@ packages:
   - jq
   - less
   - vim-minimal
-  # crun recommends but doesn't require criu and criu-libs. We want them for
-  # checkpoint/restore. https://github.com/coreos/fedora-coreos-tracker/issues/1370
-  - criu criu-libs
   # deps of bootc, but let's be explicit. e.g. even if bootc drops the skopeo
   # dep, we still want it
   - podman skopeo
+  # crun recommends but doesn't require criu and criu-libs. We want them for
+  # checkpoint/restore. https://github.com/coreos/fedora-coreos-tracker/issues/1370
+  - crun criu criu-libs
   # storage
   - cryptsetup
   - lvm2
