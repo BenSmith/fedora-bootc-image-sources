@@ -1,0 +1,8 @@
+metadata:
+  name: fedora-bootc-hypervisor
+  summary: Fedora Bootable Hypervisor
+
+include:
+  - fedora-generic.yaml
+  - hypervisor/manifest.yaml
+  - hypervisor/kernel.yaml

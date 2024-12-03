@@ -23,7 +23,7 @@
 # Because it's generating a base image and uses containerization features itself.
 # In the future some of this can be lifted.
 
-FROM quay.io/fedora/fedora:rawhide as repos
+FROM quay.io/fedora/fedora:41 as repos
 
 # BOOTSTRAPPING: This can be any image that has rpm-ostree and selinux-policy-targeted.
 FROM quay.io/fedora/fedora:41 as builder
@@ -56,4 +56,5 @@ FROM oci-archive:./out.ociarchive
 # something anyway, we might as well cleanup after ourselves.
 RUN --mount=type=bind,from=builder,src=.,target=/var/tmp \
     --mount=type=bind,rw=true,src=.,dst=/buildcontext,bind-propagation=shared \
-      rm /buildcontext/out.ociarchive
+      ls -a
+#       rm /buildcontext/out.ociarchive

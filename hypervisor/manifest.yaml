@@ -1,0 +1,65 @@
+recommends: false
+
+include:
+  - ../tier-1/manifest.yaml
+#  - maybenvidia.yaml
+
+packages:
+  - atheros-firmware
+  - brcmfmac-firmware
+  - cockpit
+  - cockpit-bridge
+  - cockpit-machines
+  - cockpit-networkmanager
+  - cockpit-podman
+  - cockpit-selinux
+  - cockpit-storaged
+  - cockpit-system
+  - hdparm
+  - incus
+  - incus-agent
+  - incus-client
+  - incus-selinux
+  - incus-tools
+  - libvirt-client
+  - libvirt-client-qemu
+  - libvirt-daemon
+  - libvirt-daemon-config-network
+  - libvirt-daemon-driver-interface
+  - libvirt-daemon-driver-lxc
+  - libvirt-daemon-driver-network
+  - libvirt-daemon-driver-nwfilter
+  - libvirt-daemon-driver-qemu
+  - libvirt-daemon-driver-secret
+  - libvirt-daemon-driver-storage-core
+#  - libvirt-daemon-lxc
+  - lua-lxc
+  - lxc
+  - lxc-devel
+  - lxc-doc
+  - lxcfs
+  - lxc-libs
+  - lxc-templates
+  - nfs-utils
+  - open-vm-tools
+  - pciutils
+  - pcp-zeroconf
+  - podman
+  - podman-compose
+  - podman-docker
+  - python3-lxc
+  - qemu-kvm
+  - qemu-guest-agent
+  - rclone
+  - realtek-firmware
+  - samba
+  - samba-usershares
+  - snapraid
+  - tmux
+  - virt-install
+  - wireguard-tools
+  - xdg-dbus-proxy
+  - xdg-user-dirs
+
+exclude-packages:
+  - zfs-fuse

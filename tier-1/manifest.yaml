@@ -1,5 +1,5 @@
 # Flip this back on, we're going to be a larger system
-recommends: true
+recommends: false
 
 include:
   - ../tier-x/manifest.yaml
