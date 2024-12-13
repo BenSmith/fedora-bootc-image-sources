@@ -1,7 +1,4 @@
-
-# Modern defaults we want
-boot-location: modules
-tmp-is-dir: true
+edition: "2024"
 # https://github.com/CentOS/centos-bootc/issues/167
 machineid-compat: true
 # Be minimal
