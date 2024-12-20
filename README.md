@@ -49,15 +49,23 @@ See this page[6] of the documentation for more information.
 
 ## Tiers
 
-There are currently 3 tiers:
+At the current time, there is just one reference base image published
+to the registry. Internally the content set is split up somewhat
+into "tiers", but this is an internal implementation detail and may change
+at any time.
+
+It is planned to rework and improve this in the future, especially
+to support smaller custom images. For more on this, see
+[this tracker issue](https://gitlab.com/fedora/bootc/tracker/-/issues/32).
+
 - **tier-1**: This image is the default, what is published as
   https://quay.io/repository/fedora/fedora-bootc
-- **tier-0**: This image is more of a convenient centralization point for CI
+- **tier-0**: This content set is more of a convenient centralization point for CI
   and curation around a package set that we can all agree is the rough minimum
   necessary for a usable system. It's not meant to be used as is, but layered
   upon.
-- **tier-x**: This image is not intended for end-users. It's the shared base
-  used by all image-based Fedora variants (IoT, Atomic Desktops, and CoreOS).
+- **tier-x**: This content set is the shared base used by all image-based
+  Fedora variants (IoT, Atomic Desktops, and CoreOS).
   Changes to this tier may be done without accounting for external users.
   To build this, pass `--build-arg=MANIFEST=fedora-tier-x.yaml` to the build
   command above.
