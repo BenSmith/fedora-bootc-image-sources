@@ -27,7 +27,8 @@ FROM quay.io/fedora/fedora:41 as repos
 
 # BOOTSTRAPPING: This can be any image that has rpm-ostree and selinux-policy-targeted.
 FROM quay.io/fedora/fedora:41 as builder
-RUN dnf -y install rpm-ostree selinux-policy-targeted
+RUN dnf -y upgrade && \
+    dnf -y install rpm-ostree selinux-policy-targeted
 ARG MANIFEST=fedora-bootc.yaml
 COPY --from=repos /etc/dnf/vars /etc/dnf/vars
 COPY --from=repos /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-* /etc/pki/rpm-gpg
@@ -42,9 +43,9 @@ COPY --from=repos /etc/yum.repos.d/*.repo /src
 RUN --mount=type=cache,target=/workdir \
     --mount=type=bind,rw=true,src=.,dst=/buildcontext,bind-propagation=shared \
     --mount=type=bind,from=repos,src=/,dst=/repos \
-      rpm-ostree compose image --image-config fedora-bootc-config.json \
-        --cachedir=/workdir --format=ociarchive --initialize ${MANIFEST} \
-       --source-root=/repos /buildcontext/out.ociarchive
+    rpm-ostree compose image --image-config fedora-bootc-config.json \
+    --cachedir=/workdir --format=ociarchive --initialize ${MANIFEST} \
+    --source-root=/repos /buildcontext/out.ociarchive
 
 FROM oci-archive:./out.ociarchive
 # Need to reference builder here to force ordering. But since we have to run
