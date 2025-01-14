@@ -52,6 +52,10 @@ include:
 packages:
   # this is implied by dependencies but let's make it explicit
   - coreutils
+  # We need dnf for building derived container images. In Fedora, this pulls
+  # in dnf5. In CentOS/RHEL, this pulls in dnf(4). We can simplify this back to
+  # just `dnf` once the `dnf` package is retired from Fedora.
+  - /usr/bin/dnf
   # Even in tier-0, we have this.  If you don't want SELinux today, you'll need
   # to build a custom image.
   - selinux-policy-targeted
